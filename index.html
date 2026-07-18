@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MPLS OSIS SMANTI TEBAS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#081b3a,#0e2c5a);
+color:white;
+overflow-x:hidden;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+width:100%;
+height:100%;
+background:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200') center/cover;
+opacity:.18;
+z-index:-1;
+}
+
+.logo{
+width:120px;
+height:120px;
+border-radius:50%;
+background:white;
+padding:8px;
+margin-bottom:20px;
+box-shadow:0 0 25px rgba(255,255,255,.3);
+}
+
+.hero h1{
+font-size:3rem;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:1.1rem;
+opacity:.9;
+max-width:700px;
+}
+
+.btn-group{
+margin-top:25px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.btn{
+padding:14px 28px;
+border:none;
+border-radius:30px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+text-decoration:none;
+}
+
+.btn-primary{
+background:#ffd700;
+color:#111;
+}
+
+.btn-primary:hover{
+transform:translateY(-3px);
+}
+
+.btn-outline{
+background:transparent;
+border:2px solid white;
+color:white;
+}
+
+.btn-outline:hover{
+background:white;
+color:#111;
+}
+
+.section{
+padding:80px 20px;
+max-width:1200px;
+margin:auto;
+}
+
+.section-title{
+text-align:center;
+font-size:2rem;
+margin-bottom:40px;
+}
+
+.glass{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
+padding:25px;
+}
+
+.motivation{
+text-align:center;
+font-size:1.1rem;
+line-height:1.8;
+}
+
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:20px;
+}
+
+.menu-card{
+background:rgba(255,255,255,.08);
+border-radius:20px;
+padding:25px;
+text-align:center;
+transition:.3s;
+cursor:pointer;
+}
+
+.menu-card:hover{
+transform:translateY(-8px);
+}
+
+.menu-card span{
+font-size:2rem;
+display:block;
+margin-bottom:10px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.stat-card{
+text-align:center;
+padding:30px;
+border-radius:20px;
+background:rgba(255,255,255,.08);
+}
+
+.stat-card h2{
+font-size:2rem;
+color:#ffd700;
+}
+
+.quote{
+text-align:center;
+font-size:1.4rem;
+font-weight:600;
+padding:50px 20px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+background:rgba(0,0,0,.2);
+}
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+padding:20px;
+}
+
+.popup-content{
+max-width:500px;
+text-align:center;
+background:#102c5a;
+padding:30px;
+border-radius:20px;
+}
+
+.popup button{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+background:#ffd700;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.particle{
+position:fixed;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+opacity:.5;
+animation:float 12s linear infinite;
+z-index:-2;
+}
+
+@keyframes float{
+from{
+transform:translateY(100vh);
+}
+to{
+transform:translateY(-100px);
+}
+}
+
+@media(max-width:768px){
+.hero h1{
+font-size:2.1rem;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="popup" id="popup">
+<div class="popup-content">
+<h2>🎉 Selamat Datang</h2>
+<p>
+Selamat datang peserta didik baru di
+<b>MPLS OSIS SMANTI TEBAS 2026/2027</b>.
+Semoga kegiatan ini menjadi langkah awal menuju prestasi yang luar biasa.
+</p>
+<button onclick="tutupPopup()">Masuk</button>
+</div>
+</div>
+
+<section class="hero">
+
+<!-- Ganti dengan logo sekolah -->
+<img src="logo.png" class="logo">
+
+<h1>MPLS OSIS SMANTI TEBAS</h1>
+<p>
+Tumbuh Bersama, Berkarya Bersama,
+dan Menjadi Generasi Berprestasi.
+</p>
+
+<div class="btn-group">
+<button class="btn btn-primary" onclick="mulaiMPLS()">
+    Mulai isi harapan kamu
+</button>
+<a href="#tentang" class="btn btn-outline">Tentang MPLS</a>
+</div>
+
+</section>
+
+<section class="section">
+<h2 class="section-title">💡 Motivasi Hari Ini</h2>
+
+<div class="glass motivation">
+<p id="motivasi"></p>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">⚡ Menu Cepat</h2>
+
+<div class="menu-grid">
+<div class="menu-card"><span>📅</span>Jadwal</div>
+<div class="menu-card"><span>📝</span>Presensi</div>
+<div class="menu-card"><span>📚</span>Materi</div>
+<div class="menu-card"><span>📢</span>Pengumuman</div>
+<div class="menu-card"><span>🖼️</span>Galeri</div>
+<div class="menu-card"><span>❓</span>Bantuan</div>
+</div>
+</section>
+
+<section class="section" id="tentang">
+<h2 class="section-title">🏫 Tentang MPLS</h2>
+
+<div class="glass">
+<p>
+Masa Pengenalan Lingkungan Sekolah (MPLS) merupakan
+kegiatan yang bertujuan membantu peserta didik baru
+mengenal lingkungan sekolah, guru, teman, budaya sekolah,
+serta berbagai kegiatan yang ada di SMAN 3 Tebas.
+</p>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">📊 Statistik Sekolah</h2>
+
+<div class="stats">
+
+<div class="stat-card">
+<h2>182+</h2>
+<p>Siswa</p>
+</div>
+
+<div class="stat-card">
+<h2>16+</h2>
+<p>Guru</p>
+</div>
+
+<div class="stat-card">
+<h2>Banyak</h2>
+<p>Prestasi</p>
+</div>
+
+<div class="stat-card">
+<h2>100%</h2>
+<p>Semangat</p>
+</div>
+
+</div>
+</section>
+
+<section class="quote">
+"Hari ini mengenal sekolah,
+esok membangun masa depan."
+</section>
+
+<footer>
+OSIS SMANTI TEBAS © 2026
+</footer>
+
+<script>
+
+function mulaiMPLS() {
+    window.location.href = "harapankamu.html";
+}
+
+function tutupPopup(){
+document.getElementById('popup').style.display='none';
+}
+
+const motivasi = [
+
+'"Teruslah belajar demi cita-cita yang kamu impikan." — RAMA',
+
+];
+
+document.getElementById("motivasi").innerText =
+motivasi[Math.floor(Math.random()*motivasi.length)];
+
+for(let i=0;i<40;i++){
+let p=document.createElement("div");
+p.classList.add("particle");
+p.style.left=Math.random()*100+"%";
+p.style.animationDuration=(8+Math.random()*8)+"s";
+document.body.appendChild(p);
+}
+
+</script>
+
+</body>
+</html>
