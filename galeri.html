@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeri MPLS SMANTI Tebas</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#081b3a,#0e2c5a);
+color:white;
+padding:20px;
+}
+
+.hero{
+text-align:center;
+margin-bottom:20px;
+}
+
+.hero h1{
+font-size:28px;
+margin-bottom:5px;
+}
+
+.hero p{
+opacity:.8;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-bottom:20px;
+}
+
+.stat-card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+padding:15px;
+border-radius:15px;
+text-align:center;
+}
+
+.stat-card h2{
+color:#ffd700;
+}
+
+.tabs{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+overflow:auto;
+}
+
+.tab{
+padding:12px 18px;
+border:none;
+border-radius:20px;
+background:rgba(255,255,255,.08);
+color:white;
+cursor:pointer;
+white-space:nowrap;
+}
+
+.tab.active{
+background:#ffd700;
+color:black;
+font-weight:bold;
+}
+
+.section{
+display:none;
+}
+
+.section.active{
+display:block;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+gap:12px;
+margin-top:10px;
+}
+
+.gallery img{
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+border-radius:15px;
+cursor:pointer;
+transition:.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.03);
+}
+
+.twibbon-card,
+.video-card{
+background:rgba(255,255,255,.08);
+padding:15px;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+.twibbon-card img{
+width:100%;
+border-radius:15px;
+margin-bottom:10px;
+}
+
+.btn{
+display:inline-block;
+margin-top:10px;
+padding:10px 18px;
+background:#ffd700;
+color:black;
+text-decoration:none;
+border-radius:20px;
+font-weight:bold;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:20px;
+padding:12px;
+background:#ffd700;
+color:black;
+text-decoration:none;
+border-radius:20px;
+font-weight:bold;
+}
+
+#lightbox{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+#lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="hero">
+<h1>📸 Galeri MPLS 2026</h1>
+<p>Momen Terbaik MPLS SMANTI Tebas</p>
+</div>
+
+<div class="stats">
+<div class="stat-card">
+<h2>0</h2>
+<p>Foto</p>
+</div>
+
+<div class="stat-card">
+<h2>0</h2>
+<p>Video</p>
+</div>
+
+<div class="stat-card">
+<h2>0</h2>
+<p>Twibbon</p>
+</div>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab('foto',this)">📸 Foto</button>
+<button class="tab" onclick="showTab('twibbon',this)">🖼️ Twibbon</button>
+<button class="tab" onclick="showTab('video',this)">🎥 Video</button>
+</div>
+
+<!-- FOTO -->
+
+<div id="foto" class="section active">
+
+<h3>📅 Hari 1</h3>
+<div class="gallery">
+<img src="img/hari1-1.jpg" onclick="openImage(this.src)">
+<img src="img/hari1-2.jpg" onclick="openImage(this.src)">
+<img src="img/hari1-3.jpg" onclick="openImage(this.src)">
+<img src="img/hari1-4.jpg" onclick="openImage(this.src)">
+</div>
+
+</div>
+
+<!-- TWIBBON -->
+<div id="twibbon" class="section">
+
+<h3>🖼️ Koleksi Twibbon Peserta MPLS</h3>
+
+<div class="gallery">
+
+<img src="twibbon/1.jpg" onclick="openImage(this.src)">
+<img src="twibbon/2.jpg" onclick="openImage(this.src)">
+<img src="twibbon/3.jpg" onclick="openImage(this.src)">
+<img src="twibbon/4.jpg" onclick="openImage(this.src)">
+<img src="twibbon/5.jpg" onclick="openImage(this.src)">
+<img src="twibbon/6.jpg" onclick="openImage(this.src)">
+
+</div>
+
+</div>
+
+<!-- VIDEO -->
+
+<div id="video" class="section">
+
+<div class="video-card">
+<h3>🎬 Upacara Pembukaan MPLS</h3>
+<p>Video dokumentasi pembukaan MPLS.</p>
+<a href="#" class="btn">▶ Tonton</a>
+</div>
+
+<div class="video-card">
+<h3>🎬 Pengenalan Lingkungan Sekolah</h3>
+<p>Video kegiatan MPLS.</p>
+<a href="#" class="btn">▶ Tonton</a>
+</div>
+
+</div>
+
+<a href="index.html" class="back">
+← Kembali ke Beranda
+</a>
+
+<div id="lightbox" onclick="closeImage()">
+<img id="preview">
+</div>
+
+<script>
+
+function showTab(id,btn){
+
+document.querySelectorAll('.section')
+.forEach(el=>el.classList.remove('active'));
+
+document.querySelectorAll('.tab')
+.forEach(el=>el.classList.remove('active'));
+
+document.getElementById(id)
+.classList.add('active');
+
+btn.classList.add('active');
+}
+
+function openImage(src){
+document.getElementById('lightbox').style.display='flex';
+document.getElementById('preview').src=src;
+}
+
+function closeImage(){
+document.getElementById('lightbox').style.display='none';
+}
+
+</script>
+
+</body>
+</html>
