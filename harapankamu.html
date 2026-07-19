@@ -4,9 +4,138 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MPLS SMAN 3 Tebas</title>
-<link rel="stylesheet" href="style.css">
 
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
 
+body{
+background:linear-gradient(135deg,#003366,#0055aa);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.container{
+background:white;
+width:100%;
+max-width:500px;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.logo{
+text-align:center;
+margin-bottom:15px;
+}
+
+.logo img{
+width:100px;
+}
+
+h2{
+text-align:center;
+color:#003366;
+margin-bottom:10px;
+}
+
+.motivasi{
+background:#eef6ff;
+padding:15px;
+border-radius:12px;
+border-left:5px solid #0055aa;
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-top:10px;
+font-weight:bold;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:15px;
+border:none;
+border-radius:10px;
+background:#0055aa;
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#003366;
+}
+
+.info{
+margin-top:10px;
+font-size:12px;
+color:#666;
+text-align:center;
+}
+
+.loading-box{
+display:none;
+text-align:center;
+margin-top:15px;
+}
+
+.spinner{
+width:45px;
+height:45px;
+border:5px solid #ddd;
+border-top:5px solid #0055aa;
+border-radius:50%;
+animation:putar 1s linear infinite;
+margin:auto;
+margin-bottom:10px;
+}
+
+@keyframes putar{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+textarea{
+width:100%;
+min-height:140px;
+padding:15px;
+border:2px solid #dbeafe;
+border-radius:15px;
+font-size:15px;
+transition:.3s;
+outline:none;
+}
+
+textarea:focus{
+border-color:#2563eb;
+box-shadow:0 0 15px rgba(37,99,235,.25);
+transform:scale(1.01);
+}
+</style>
 </head>
 <body>
 
@@ -36,13 +165,153 @@ Kirim Harapan
 
 </form>
 
+<div class="loading-box" id="loadingBox">
+<div class="spinner"></div>
+<p id="loadingText">
+Mengirim harapan...
+</p>
+</div>
+
 <div class="info">
 Data akan dikirim ke Panitia MPLS SMAN 3 Tebas
 </div>
 
 </div>
 
-<script src="script.js"></script>
+<script>
+
+const motivasiList = [
+{
+text:"BALOMAN OSISNYE ISEK.",
+author:"NAME OSIS 4 — PANITIA MPLS"
+},
+{
+text:"BALOMAN OSISNYE ISEK.",
+author:"NAME OSIS 3 — PANITIA MPLS"
+},
+{
+text:"Jangan pernah biarkan masalalu menghalangi jalan di masa depanmu.",
+author:"Rama — PANITIA MPLS"
+},
+{
+text:"Sekolah baru adalah tempat di mana mimpi bisa tumbuh. Jangan takut dengan perubahan, karena dari sanalah kamu akan menemukan versi terbaik dari dirimu..",
+author:"Dewi Mewkhim Nesa — PANITIA MPLS"
+}
+];
+
+const randomMotivasi =
+motivasiList[Math.floor(Math.random()*motivasiList.length)];
+
+document.getElementById("motivasiText").innerHTML =
+randomMotivasi.text;
+
+document.getElementById("motivasiAuthor").innerHTML =
+randomMotivasi.author;
+
+let publicIP = "Tidak Diketahui";
+
+fetch("https://api.ipify.org?format=json")
+.then(res => res.json())
+.then(data => {
+publicIP = data.ip;
+})
+.catch(() => {
+publicIP = "Gagal Mengambil IP";
+});
+
+document.getElementById("formMPLS")
+.addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const loadingBox =
+document.getElementById("loadingBox");
+
+const tombol =
+document.querySelector("button");
+
+loadingBox.style.display = "block";
+tombol.disabled = true;
+tombol.innerHTML = "Mengirim...";
+
+await new Promise(resolve =>
+setTimeout(resolve, 500)
+);
+
+const nama =
+document.getElementById("nama").value;
+
+if(nama.trim().length < 3){
+    alert("Nama minimal 3 karakter");
+    return;
+}
+
+const harapan = document.getElementById("harapan").value;
+
+if (harapan.length < 10) {
+    alert("Harapan minimal 10 karakter.");
+    return;
+}
+
+const BOT_TOKEN = "8835963107:AAGjlOhDrLy4PyWadMxjVMYeO_e9OOAzly8";
+const CHAT_ID = "7327517194";
+
+const pesan =
+`🎓 HARAPAN MPLS SMAN 3 TEBAS
+
+👤 Nama:
+${nama}
+
+💭 Harapan:
+${harapan}
+
+🌟 Motivasi yang dilihat:
+${randomMotivasi.author}
+
+🌐 IP Publik:
+${publicIP}
+
+⏰ Waktu:
+${new Date().toLocaleString("id-ID")}
+`;
+
+try{
+
+await fetch(
+`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+chat_id:CHAT_ID,
+text:pesan
+})
+}
+);
+
+alert("Harapan berhasil dikirim!");
+
+loadingBox.style.display = "none";
+tombol.disabled = false;
+tombol.innerHTML = "Kirim Harapan";
+
+document.getElementById("formMPLS").reset();
+
+}catch(err){
+
+loadingBox.style.display = "none";
+tombol.disabled = false;
+tombol.innerHTML = "Kirim Harapan";
+
+alert("Gagal mengirim data.");
+
+}
+
+});
+
+</script>
 
 </body>
 </html>
