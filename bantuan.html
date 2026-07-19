@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bantuan MPLS SMANTI Tebas</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#081b3a,#0e2c5a);
+    color:white;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    opacity:.8;
+    margin-bottom:25px;
+}
+
+.card{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:15px;
+}
+
+.card h2{
+    color:#ffd700;
+    margin-bottom:10px;
+    font-size:18px;
+}
+
+.facebook-btn{
+    display:block;
+    text-align:center;
+    background:#ffd700;
+    color:black;
+    text-decoration:none;
+    padding:14px;
+    border-radius:15px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.faq-item{
+    margin-bottom:15px;
+}
+
+.question{
+    color:#ffd700;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.answer{
+    opacity:.9;
+    line-height:1.5;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    padding:14px;
+    background:#ffd700;
+    color:black;
+    text-decoration:none;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+.faq-btn{
+    width:100%;
+    text-align:left;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.faq-content{
+    display:none;
+    padding:12px;
+    margin-top:5px;
+    border-radius:12px;
+    background:rgba(255,255,255,.05);
+    line-height:1.5;
+}
+
+.faq-content.show{
+    display:block;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Bantuan MPLS</h1>
+<p class="subtitle">SMANTI Tebas Tahun 2026</p>
+
+<div class="card">
+    <h2>Media Sosial Sekolah</h2>
+    <p>Facebook Resmi SMAN 3 Tebas</p>
+
+    <a href="https://www.facebook.com/smanti.tebas"
+       target="_blank"
+       class="facebook-btn">
+       (click) Facebook SMAN 3 Tebas
+    </a>
+</div>
+
+<div class="card">
+    <h2>❓ Pertanyaan Umum (FAQ)</h2>
+
+    <button class="faq-btn">
+        Gagal mengirim harapan [ + ]
+    </button>
+    <div class="faq-content">
+        Coba ulangi beberapa kali. Jika masih gagal,
+        harap lapor ke panitia MPLS.
+    </div>
+
+    <button class="faq-btn">
+        Jadwal tidak muncul [ + ]
+    </button>
+    <div class="faq-content">
+        Pergi ke smantitebasmplsramah.netlify.app,
+        scroll ke bawah, lalu tekan opsi Jadwal
+        apabila sudah ditemukan.
+    </div>
+
+    <button class="faq-btn">
+        MPLS berapa hari? [ + ]
+    </button>
+    <div class="faq-content">
+        MPLS dilaksanakan selama 5 hari,
+        terhitung dari Senin, 20 Juli 2026
+        hingga Jumat, 24 Juli 2026.
+    </div>
+
+    <button class="faq-btn">
+        MPLS masuk jam berapa? [ + ]
+    </button>
+    <div class="faq-content">
+        Dari awal hingga akhir kegiatan MPLS,
+        peserta masuk sekolah tetap pukul
+        07.00 WIB.
+    </div>
+</div>
+
+<a href="index.html" class="back">
+    ← Kembali ke Beranda
+</a>
+
+<script>
+document.querySelectorAll('.faq-btn')
+.forEach(btn=>{
+
+    btn.addEventListener('click',()=>{
+
+        const content = btn.nextElementSibling;
+
+        content.classList.toggle('show');
+
+    });
+
+});
+</script>
+
+</body>
+</html>
