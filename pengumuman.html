@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pengumuman MPLS</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#081b3a,#0e2c5a);
+color:white;
+padding:20px;
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+border-radius:18px;
+padding:18px;
+margin-bottom:15px;
+}
+
+.card h3{
+color:#ffd700;
+margin-bottom:8px;
+}
+
+.tanggal{
+font-size:13px;
+opacity:.7;
+margin-bottom:10px;
+}
+
+.kosong{
+text-align:center;
+opacity:.7;
+padding:30px;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:20px;
+padding:14px;
+background:#ffd700;
+color:black;
+text-decoration:none;
+border-radius:20px;
+font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<h1>📢 Pengumuman MPLS</h1>
+
+<div id="listPengumuman">
+<div class="kosong">
+Memuat pengumuman...
+</div>
+</div>
+
+<a href="index.html" class="back">
+← Kembali ke Beranda
+</a>
+
+<script>
+
+fetch("info.json")
+.then(res=>res.json())
+.then(data=>{
+
+const container =
+document.getElementById("listPengumuman");
+
+if(data.length === 0){
+container.innerHTML =
+'<div class="kosong">Belum ada pengumuman.</div>';
+return;
+}
+
+container.innerHTML = "";
+
+data.forEach(item=>{
+
+container.innerHTML += `
+<div class="card">
+<h3>${item.judul}</h3>
+<div class="tanggal">
+📅 ${item.tanggal}
+</div>
+<p>${item.isi}</p>
+</div>
+`;
+
+});
+
+})
+.catch(()=>{
+
+document.getElementById("listPengumuman")
+.innerHTML =
+'<div class="kosong">Gagal memuat pengumuman.</div>';
+
+});
+
+</script>
+
+</body>
+</html>
