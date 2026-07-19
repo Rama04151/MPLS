@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tebak SMANTI</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#081b3a,#0e2c5a);
+color:white;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+padding:20px;
+border-radius:20px;
+margin-bottom:15px;
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+opacity:.8;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#ffd700;
+color:black;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+.option{
+background:rgba(255,255,255,.08);
+padding:14px;
+border-radius:12px;
+margin-top:10px;
+cursor:pointer;
+}
+
+.option:hover{
+background:rgba(255,215,0,.2);
+}
+
+.hidden{
+display:none;
+}
+
+.score{
+font-size:22px;
+font-weight:bold;
+color:#ffd700;
+text-align:center;
+margin:15px 0;
+}
+
+.back{
+display:block;
+text-align:center;
+padding:14px;
+background:#ffd700;
+color:black;
+text-decoration:none;
+border-radius:20px;
+font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div id="loginPage" class="card">
+
+<h1>🎯 Tebak SMANTI</h1>
+
+<p class="subtitle">
+Kenali sekolahmu sambil bermain!
+</p>
+
+<input
+type="text"
+id="nama"
+placeholder="Masukkan Nama Kamu">
+
+<button onclick="mulaiGame()">
+Mulai Bermain
+</button>
+
+</div>
+
+<div id="quizPage" class="hidden">
+
+<div class="card">
+
+<h2 id="nomorSoal">
+Soal 1/10
+</h2>
+
+<h3 id="soal">
+Memuat soal...
+</h3>
+
+<div id="opsi"></div>
+
+</div>
+
+</div>
+
+<div id="hasilPage" class="hidden">
+
+<div class="card">
+
+<h1>🏆 Hasil Tebak SMANTI</h1>
+
+<p id="namaPeserta"></p>
+
+<div class="score" id="nilai"></div>
+
+<p id="pesan"></p>
+
+</div>
+
+<a href="index.html" class="back">
+← Kembali ke Beranda
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+let namaPeserta = "";
+let soalKe = 0;
+let skor = 0;
+
+let soal = [];
+
+fetch("soal.json")
+.then(res => res.json())
+.then(data => {
+
+    const startMPLS = new Date("2026-07-20");
+
+    const selisihHari = Math.floor(
+        (new Date() - startMPLS) /
+        (1000 * 60 * 60 * 24)
+    );
+
+    const hariMPLS = `hari${selisihHari + 1}`;
+
+    soal = data[hariMPLS] || [];
+
+})
+.catch(err => {
+    console.error(err);
+    alert("Gagal memuat soal");
+});
+
+function mulaiGame(){
+
+    if(soal.length === 0){
+        alert("Soal belum dimuat.");
+        return;
+    }
+
+    namaPeserta =
+    document.getElementById("nama").value.trim();
+
+    if(!namaPeserta){
+        alert("Masukkan nama terlebih dahulu");
+        return;
+    }
+
+    document.getElementById("loginPage")
+    .classList.add("hidden");
+
+    document.getElementById("quizPage")
+    .classList.remove("hidden");
+
+    tampilSoal();
+
+}
+
+function tampilSoal(){
+
+if(soalKe >= soal.length){
+selesaiGame();
+return;
+}
+
+document.getElementById("nomorSoal")
+.innerText =
+`Soal ${soalKe+1}/${soal.length}`;
+
+document.getElementById("soal")
+.innerText =
+soal[soalKe].soal;
+
+const opsi =
+document.getElementById("opsi");
+
+opsi.innerHTML = "";
+
+soal[soalKe].opsi.forEach(
+(teks,index)=>{
+
+const div =
+document.createElement("div");
+
+div.className = "option";
+
+div.innerText = teks;
+
+div.onclick = ()=>{
+
+if(
+index ===
+soal[soalKe].jawaban
+){
+skor++;
+}
+
+soalKe++;
+
+tampilSoal();
+
+};
+
+opsi.appendChild(div);
+
+});
+
+}
+
+function selesaiGame(){
+
+document.getElementById("quizPage")
+.classList.add("hidden");
+
+document.getElementById("hasilPage")
+.classList.remove("hidden");
+
+document.getElementById("namaPeserta")
+.innerHTML =
+`👤 ${namaPeserta}`;
+
+document.getElementById("nilai")
+.innerHTML =
+`${skor}/${soal.length}`;
+
+let pesan = "";
+
+if(skor <= 2){
+
+pesan =
+"😅 Belum cukup kenal nih, ayo kenali lagi lingkungan SMA kita.";
+
+}else if(skor <= 4){
+
+pesan =
+"🙂 Wih lumayan, ayo cari lebih tau tentang SMA kita.";
+
+}else if(skor <= 6){
+
+pesan =
+"👏 Untuk sekelas siswa baru, ini hebat banget sih.";
+
+}else if(skor <= 8){
+
+pesan =
+"🔥 Cukup tinggi, hampir sempurna.";
+
+}else if(skor == 9){
+
+pesan =
+"🧋 Keren sekali, patut diberi es teh satu gelas tapi bayar sendiri.";
+
+}else{
+
+pesan =
+"🌟 Nilai yang sempurna, tapi senyuman dia tak kalah sempurna.";
+
+}
+
+document.getElementById("pesan")
+.innerText = pesan;
+
+
+
+/*
+Nanti di sini kirim ke Telegram
+
+Nama
+Skor
+Tanggal
+Hari MPLS
+
+fetch(...)
+*/
+
+}
+
+</script>
+
+</body>
+</html>

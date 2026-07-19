@@ -1,0 +1,117 @@
+{
+  "hari1": [
+    {
+      "soal": "Siapa yang membuka MPLS 2026?",
+      "opsi": [
+        "Ketua OSIS",
+        "Kepala Sekolah",
+        "Guru BK",
+        "Ketua Panitia"
+      ],
+      "jawaban": 1
+    },
+    {
+      "soal": "Nama sekolah kita apasih?",
+      "opsi": [
+        "SMKN 3 Tebas",
+        "SMAN 3 Tebas",
+        "SMAS 3 Tebas",
+        "SMPN 3 Tebas"
+      ],
+      "jawaban": 1
+    },
+    {
+      "soal": "Siapa yang menjadi pembina upacara tadi?",
+      "opsi": [
+        "Bapak Syakirin, S.Sos",
+        "Bapak Nur Syahrizam, S.Pd",
+        "Bapak Ahmad Yoga Khalid, S.Pd",
+        "Bapak Herwansyah, S.P"
+      ],
+      "jawaban": 3
+    },
+    {
+      "soal": "MPLS berjalan berapa hari",
+      "opsi": [
+        "3 Hari",
+        "4 Hari",
+        "5 Hari",
+        "6 Hari"
+      ],
+      "jawaban": 2
+    },
+    {
+      "soal": "Berapa jumlah siswa baru yang mendaftar di SMAN 3 Tebas",
+      "opsi": [
+        "50 Siswa",
+        "51 Siswa",
+        "52 Siswa",
+        "53 Siswa"
+      ],
+      "jawaban": 2
+    },
+    {
+      "soal": "Apa itu MPLS",
+      "opsi": [
+        "Masa Permainan Lingkungan Sekolah",
+        "Masa Pelajar Lingkungan Sekitar",
+        "Masa Pengenalan Lingkungan Sekolah",
+        "Mau Petai Lagi Sekali"
+      ],
+      "jawaban": 2
+    },
+    {
+      "soal": "Kelas X di SMAN 3 Tebas ada berapa kelas?",
+      "opsi": [
+        "2 Kelas",
+        "3 Kelas",
+        "4 Kelas",
+        "5 Kelas"
+      ],
+      "jawaban": 0
+    },
+    {
+      "soal": "Siapa ketua OSIS SMAN 3 Tebas sekarang",
+      "opsi": [
+        "Wiranto",
+        "Amirul",
+        "Rama",
+        "Iman"
+      ],
+      "jawaban": 2
+    },
+    {
+      "soal": "5 + 5 = ...",
+      "opsi": [
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "jawaban": 0
+    },
+    {
+      "soal": "Siapa nama kepala SMAN 3 Tebas",
+      "opsi": [
+        "Bapak Herwansyah, S.P",
+        "Bapak Darus, S.Pd",
+        "Ibu Nia Riana, S.Pd",
+        "Ibu Apria Maulina, S.Pd, M.Pd"
+      ],
+      "jawaban": 0
+    }
+  ],
+
+  "hari2": [
+    {
+      "soal": "Materi Sahabat Hebat mengajarkan tentang?",
+      "opsi": [
+        "Bermain Game",
+        "Mendengar dan Menghargai Orang Lain",
+        "Menabung",
+        "Olahraga"
+      ],
+      "jawaban": 1
+    }
+  ]
+}
